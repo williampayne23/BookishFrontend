@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import Test from './TestComponent.js';
 import Login from './Login.js';
 import Main from './Main.js';
 import './App.css';
@@ -30,7 +28,7 @@ class App extends React.Component {
 					Learn React
 				</a>
 			</header> */}
-				{this.state.token == '' ? (
+				{this.state.token === '' ? (
 					<Login done={this.onLogin} />
 				) : (
 					<Main done={this.onLogout} token={this.state.token} />

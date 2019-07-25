@@ -16,7 +16,7 @@ class Login extends React.Component {
 				<h3>TODO</h3>
 				<form >
 					<label htmlFor="">
-                        Login
+						Login
 					</label>
 					<br />
 					<label>Username:</label>
@@ -32,10 +32,10 @@ class Login extends React.Component {
 						value={this.state.password}
 					/><br />
 					<button onClick={this.handleSubmit}>
-                        Login
+						Login
 					</button>
-					<button>
-                        Sign Up
+					<button onClick={this.signUp}>
+						Sign Up
 					</button>
 				</form>
 			</div>
@@ -53,6 +53,29 @@ class Login extends React.Component {
 	async handleSubmit(e) {
 		e.preventDefault();
 		var options = {
+			uri: 'http://localhost:3001/account',
+			qs: {
+				user: this.state.username,
+				password: this.state.password
+			},
+			headers: {
+				'User-Agent': 'Request-Promise',
+				'Access-Control-Allow-Origin': true
+			},
+			json: true // Automatically parses the JSON string in the response
+		};
+
+		const response = await RP(options);
+		this.props.done(response);
+		if (!this.state.username) {
+			return;
+		}
+
+
+	}
+	async signUp() {
+		var options = {
+			method: 'POST',
 			uri: 'http://localhost:3001/account',
 			qs: {
 				user: this.state.username,
